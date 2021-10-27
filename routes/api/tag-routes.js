@@ -24,8 +24,10 @@ router.get('/:id', async (req, res) => {
   res.json(result)
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new tag
+  let result = await Tag.create(req.body)
+  res.json(result)
 });
 
 router.put('/:id', (req, res) => {
