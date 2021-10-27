@@ -110,7 +110,7 @@ router.delete('/:id', async (req, res) => {
   if (numberDestroyed) {
     res.send(`Product ${req.params.id} deleted`)
   } else {
-    res.send('Could not find item with that ID')
+    res.send('Could not find product with that ID')
   }
 });
 
