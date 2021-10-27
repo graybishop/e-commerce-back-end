@@ -13,9 +13,15 @@ router.get('/', async (req, res) => {
   res.json(result)
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
+  let result = await Tag.findOne({
+    where: {id: req.params.id},
+    include: [{model:Product}]
+  })
+
+  res.json(result)
 });
 
 router.post('/', (req, res) => {
