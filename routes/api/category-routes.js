@@ -9,13 +9,18 @@ router.get('/', async (req, res) => {
   let result = await Category.findAll({
     include: [{ model:Product}]
   })
-  
+
   res.json(result)
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
+  let result = await Category.findOne({
+    where: {id: req.params.id},
+    include: [{model:Product}]
+  })
+  res.json(result)
 });
 
 router.post('/', (req, res) => {
