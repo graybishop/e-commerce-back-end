@@ -29,12 +29,26 @@ router.post('/', async (req, res) => {
   res.json(result)
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
+  let [result] = await Category.update(req.body, {
+    where: {id: req.params.id}
+  })
+
+  res.send(`${result} Categories updated`)
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  let numberDestroyed = await Category.destroy({
+    where: {id: req.params.id}
+  })
+
+  if (numberDestroyed) {
+    res.send(`Category ${req.params.id} deleted.`)
+  } else {
+    res.send('Could not find tag with that ID')
+  }
 });
 
 module.exports = router;
