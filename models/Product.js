@@ -10,7 +10,7 @@ class Product extends Model {}
 Product.init(
   {
     // define columns
-    product_name:{
+    productName:{
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -33,7 +33,6 @@ Product.init(
   {
     sequelize,
     timestamps: false,
-    underscored: true,
     modelName: 'product',
   }
 );
