@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const { Tag, Product, ProductTag} = require('../../models');
 
 // The `/api/tags` endpoint
 
@@ -40,12 +40,16 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
+  let links = await ProductTag.findAll({
+    where: {    tagId: req.params.id
+  }})
+  
   let numberDestroyed = await Tag.destroy({
     where: {id: req.params.id}
   })
 
   if (numberDestroyed) {
-    res.send(`Tag ${req.params.id} deleted`)
+    res.send(`Tag ${req.params.id} deleted. ${links.length} Links deleted.`)
   } else {
     res.send('Could not find tag with that ID')
   }
